@@ -2,7 +2,48 @@
 <meta charset="utf-8">
 <style>
 
-/* CSS goes here. */
+.subunit.AFG { fill: #f47272; stroke: #777; }
+.subunit.BGD { fill: #f47272; stroke: #777; }
+.subunit.CMR { fill: #efd3d2; stroke: #777; }
+.subunit.BFA { fill: #efd3d2; stroke: #777; }
+.subunit.BDI { fill: #efd3d2; stroke: #777; }
+.subunit.CAF { fill: #e22634; stroke: #777; }
+.subunit.TCD { fill: #96101b; stroke: #777; }
+.subunit.COD { fill: #96101b; stroke: #777; }
+.subunit.ETH { fill: #f47272; stroke: #777; }
+.subunit.GIN { fill: #efd3d2; stroke: #777; }
+.subunit.HTI { fill: #efd3d2; stroke: #777; }
+.subunit.INX { fill: #f47272; stroke: #777; }
+.subunit.IRR { fill: #efd3d2; stroke: #777; }
+.subunit.JOR { fill: #efd3d2; stroke: #777; }
+.subunit.KEN { fill: #f47272; stroke: #777; }
+.subunit.MDG { fill: #efd3d2; stroke: #777; }
+.subunit.MMR { fill: #efd3d2; stroke: #777; }
+.subunit.NER { fill: #740808; stroke: #777; }
+.subunit.NGA { fill: #bc1c28; stroke: #777; }
+.subunit.PAK { fill: #bc1c28; stroke: #777; }
+.subunit.PHL { fill: #efd3d2; stroke: #777; }
+.subunit.SLE { fill: #efd3d2; stroke: #777; }
+.subunit.SOX { fill: #bc1c28; stroke: #777; }
+.subunit.SOP { fill: #bc1c28; stroke: #777; }
+.subunit.SDS { fill: #bc1c28; stroke: #777; }
+.subunit.SYX { fill: #efd3d2; stroke: #777; }
+.subunit.MLI { fill: #bc1c28; stroke: #777; }
+.subunit.MRT { fill: #f47272; stroke: #777; }
+.subunit.SDN { fill: #f47272; stroke: #777; }
+.subunit.UGA { fill: #efd3d2; stroke: #777; }
+.subunit.ZWE { fill: #efd3d2; stroke: #777; }
+.subunit { fill: #adadad; stroke: #777; }
+
+.subunit-label{
+  fill: #000;
+  fill-opacity: .5;
+  font-size: 15px;
+  font-weight: 300;
+  text-anchor: middle;
+}
+
+
 
 </style>
 <body>
@@ -25,9 +66,14 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 d3.json("msf.json", function(error, msf) {
-  svg.append("path")
-      .datum(topojson.feature(msf, msf.objects.MSFsubunits))
+  svg.selectAll(".subunit")
+     .data(topojson.feature(msf, msf.objects.MSFsubunits).features)
+  .enter().append("path")
+      .attr("class", function(d) { return "subunit " + d.id; })
       .attr("d", path);
+
+
+
 });
 
 
